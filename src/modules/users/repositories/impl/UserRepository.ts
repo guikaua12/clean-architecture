@@ -12,7 +12,23 @@ export class UserRepository implements IUserRepository {
 
         await user.save();
 
-        return {email, password} as User;
+        return {id: user._id.toString(), email, password} as User;
+    }
+
+    async findByEmail(email: string): Promise<User | null> {
+        const user = await UserModel.findOne({
+            email
+        });
+
+        if(!user) return null;
+
+
+        const obj = user.toObject();
+        console.log(obj)
+
+
+
+        return null;
     }
 
 }
