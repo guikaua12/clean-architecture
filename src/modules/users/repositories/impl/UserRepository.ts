@@ -1,7 +1,7 @@
 import {IUserRepository} from '../IUserRepository';
 import {ICreateUserDTO} from '../../dtos/ICreateUserDTO';
 import {User} from '../../models/User';
-import {User as UserModel} from '../../database/models/User';
+import {UserModel} from '../../database/models/User';
 
 export class UserRepository implements IUserRepository {
     async create({email, password}: ICreateUserDTO): Promise<User> {
@@ -22,13 +22,7 @@ export class UserRepository implements IUserRepository {
 
         if(!user) return null;
 
-
-        const obj = user.toObject();
-        console.log(obj)
-
-
-
-        return null;
+        return user.toObject();
     }
 
 }
