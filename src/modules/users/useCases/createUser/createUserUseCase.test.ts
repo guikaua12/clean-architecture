@@ -1,9 +1,8 @@
-import {describe, it, beforeEach, expect} from '@jest/globals';
+import {beforeEach, describe, expect, it} from '@jest/globals';
 import {IUserRepository} from '../../repositories/IUserRepository';
 import {CreateUserUseCase} from './createUserUseCase';
 import {MemoryUserRepository} from '../../repositories/impl/MemoryUserRepository';
 import {ICreateUserDTO} from '../../dtos/ICreateUserDTO';
-import {AppError} from '../../../../shared/errors/AppError';
 
 describe('create user usecase',  () => {
     let userRepository: IUserRepository;
