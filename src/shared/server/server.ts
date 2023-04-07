@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import express, {Request, Response, NextFunction} from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 import {router} from '../routes';
 import {AppError} from '../errors/AppError';
 
@@ -14,6 +14,7 @@ server.use((err: any , req: Request, res: Response, next: NextFunction) => {
         return res.status(err.status).json({message: err.message});
     }
 
+    console.log(err);
     res.status(500).json({message: 'Internal Server Error'});
 });
 
