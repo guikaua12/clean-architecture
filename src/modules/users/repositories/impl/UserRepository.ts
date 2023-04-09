@@ -2,6 +2,7 @@ import {IUserRepository} from '../IUserRepository';
 import {ICreateUserDTO} from '../../dtos/ICreateUserDTO';
 import {User} from '../../models/User';
 import {UserModel} from '../../database/models/User';
+import {IUpdateUserDTO} from '../../dtos/IUpdateUserDTO';
 
 export class UserRepository implements IUserRepository {
     async create({email, password}: ICreateUserDTO): Promise<User> {
@@ -23,6 +24,19 @@ export class UserRepository implements IUserRepository {
         if(!user) return null;
 
         return user.toObject();
+    }
+
+    async update(data: IUpdateUserDTO): Promise<User | null> {
+        const user = UserModel.findByIdAndUpdate(data.id, {
+            $set: {
+                email: data.email,
+                password: data.password
+            }
+        }, {
+            new: true
+        });
+
+        return user || null;
     }
 
 }
