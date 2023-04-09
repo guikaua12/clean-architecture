@@ -7,13 +7,13 @@ export class CreateUserUseCase {
     constructor(private userRepository: IUserRepository) {
     }
 
-    async execute({email, password}: ICreateUserDTO): Promise<User | null> {
-        if(!email || !password) throw new AppError(422, 'Missing parameters');
+    async execute(data: ICreateUserDTO): Promise<User> {
+        if(!data.email || !data.password) throw new AppError(422, 'Missing parameters');
 
-        const userExists = await this.userRepository.findByEmail(email);
+        const userExists = await this.userRepository.findByEmail(data.email);
 
         if(userExists) throw new AppError(409, 'User already exists');
 
-        return await this.userRepository.create({email, password});
+        return await this.userRepository.create(data);
     }
 }
